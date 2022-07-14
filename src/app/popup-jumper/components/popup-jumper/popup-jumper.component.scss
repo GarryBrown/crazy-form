@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .letter {
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 36px;
+    font-family: "Roboto Light", sans-serif;
+    animation: fadein 3s;
+    opacity: 0;
+    text-align: center;
+    color: coral;
+    border-radius: 10px;
+    background: aqua;
+  }
+}
+
+
+@keyframes fadein {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
