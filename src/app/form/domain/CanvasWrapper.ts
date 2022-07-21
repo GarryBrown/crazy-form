@@ -4,9 +4,7 @@ export default class CanvasWrapper {
   private pictures: Picture[] = [];
 
   constructor(private canvasEl: HTMLCanvasElement, private ctx: CanvasRenderingContext2D) {
-    ctx.font = "18px sans-serif";
-    // ctx.rect(0, 0, 1900, 800);
-    // ctx.stroke();
+    ctx.font = "20px sans-serif";
   }
 
 
