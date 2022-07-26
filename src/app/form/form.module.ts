@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormComponent } from './form/form.component';
+import { FormComponent } from './form.component';
 import { InputComponent } from './components/input/input.component';
 import { CatchAreaComponent } from './components/catch-area/catch-area.component';
 import {ReactiveFormsModule} from "@angular/forms";

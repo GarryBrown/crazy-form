@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import CanvasWrapper from "../../domain/CanvasWrapper";
-import {fromEvent, Observable, tap, throttleTime} from "rxjs";
+import {fromEvent, Observable, tap} from "rxjs";
 import CatcherPicture from "../../domain/CatcherPicture";
 import {EventBusService} from "../../services/event-bus.service";
 import {setupCanvas} from "../../utils/setupCanvas";
@@ -22,7 +22,10 @@ export class CatchAreaComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const form: HTMLElement = document.querySelector('form')!;
+    document.body.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+    });
+    const form: HTMLElement = document.querySelector('.form')!;
     const canvasEl = this.canvas.nativeElement;
 
     canvasEl.height = (window.innerHeight - form.clientHeight);
@@ -41,7 +44,7 @@ export class CatchAreaComponent implements AfterViewInit {
     SymbolGenerator.clear$(canvasEl.width).subscribe(value => this.addPicture(value))
     requestAnimationFrame(() => this.onTick())
 
-    this.createMouseListener().subscribe()
+    this.createPointerListener().subscribe()
   }
 
   addPicture(value: Picture): void {
@@ -60,11 +63,10 @@ export class CatchAreaComponent implements AfterViewInit {
     requestAnimationFrame(() => this.onTick())
   }
 
-  private createMouseListener(): Observable<MouseEvent> {
-    return fromEvent<MouseEvent>(this.canvas.nativeElement, 'mousemove').pipe(
-      throttleTime(5),
+  private createPointerListener(): Observable<MouseEvent> {
+    return fromEvent<PointerEvent>(this.canvas.nativeElement, 'pointermove').pipe(
       tap(e => {
-        this.catcherPicture?.moveTo(e.offsetX, e.offsetY)
+        this.catcherPicture?.moveTo(Math.floor(e.offsetX), Math.floor(e.offsetY))
       })
     )
   }
