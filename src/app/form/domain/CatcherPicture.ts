@@ -35,10 +35,10 @@ export default class CatcherPicture extends BasePicture {
 
   private getPivot(ctx: CanvasRenderingContext2D): { leftX: number,  topY: number, bottomY: number, rightX: number } {
     const {pos} = this;
-    const leftX = Math.max(Math.abs(pos.x - this.width / 2), 0);
-    const topY = Math.max(Math.abs(pos.y - this.height / 2), this.height / 2);
-    const bottomY = Math.min(Math.max(pos.y, this.height) + this.height / 2, ctx.canvas.height);
-    const rightX = Math.min(Math.abs(pos.x + this.width / 2), ctx.canvas.width);
+    const leftX = Math.floor(Math.max(Math.abs(pos.x - this.width / 2), 0));
+    const topY = Math.floor(Math.max(Math.abs(pos.y - this.height / 2), this.height / 2));
+    const bottomY = Math.floor(Math.min(Math.max(pos.y, this.height) + this.height / 2, ctx.canvas.height));
+    const rightX = Math.floor(Math.min(Math.abs(pos.x + this.width / 2), ctx.canvas.width));
 
     return {leftX, topY, bottomY, rightX}
   }

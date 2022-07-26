@@ -25,7 +25,7 @@ export class SymbolGenerator {
     const letterMargin = canvasWidth / letterGenerator.length;
 
     return timer(250, 5000).pipe(map(_ => {
-      const x = getRandomInt(0, letterGenerator.length) * letterMargin;
+      const x = getRandomInt(1, letterGenerator.length - 1) * letterMargin;
       return getRandomInt(0, 2) === 1 ? SymbolFactory.reset(x) : SymbolFactory.backspace(x);
     }));
   }
